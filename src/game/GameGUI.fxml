@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.GameController">
+   <center>
+      <Pane fx:id="pane" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor></Pane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="40.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Q2CW" prefHeight="20.0" prefWidth="200.0" text="Rotate Clockwise" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" prefWidth="200.0" text="Pentago" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="DIN Condensed Bold" size="51.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q1CCW" prefHeight="20.0" prefWidth="200.0" text="Rotate Counterclockwise" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" maxWidth="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q2CCW" prefHeight="20.0" prefWidth="200.0" rotate="-90.0" text="Rotate Counterclockwise" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="360.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q3CW" prefHeight="20.0" prefWidth="200.0" rotate="-90.0" text="Rotate Clockwise" textAlignment="CENTER">
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="CENTER" prefHeight="650.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q1CW" prefHeight="20.0" prefWidth="200.0" rotate="90.0" text="Rotate Clockwise" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="360.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q4CCW" prefHeight="20.0" prefWidth="200.0" rotate="90.0" text="Rotate Counterclockwise" textAlignment="CENTER">
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font></Button>
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Q3CCW" prefHeight="20.0" prefWidth="200.0" text="Rotate Counterclockwise" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#initialize" prefWidth="100.0" text="Reset" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Kefa Regular" size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Q4CW" prefHeight="20.0" prefWidth="200.0" text="Rotate Clockwise" textAlignment="CENTER">
+               <font>
+                  <Font name="Kefa Regular" size="13.0" />
+               </font></Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
