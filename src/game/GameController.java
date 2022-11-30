@@ -3,10 +3,13 @@ package game;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 
 public class GameController {
+    @FXML
+    Label title;
     @FXML
     private Pane pane;
     @FXML
@@ -112,6 +115,7 @@ public class GameController {
     }
     public void updateViews() {
         bv.updateBoard();
+        title.setTextFill(g.getTurn().getFill());
     }
     @FXML
     private void startClock() {
