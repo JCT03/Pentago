@@ -26,6 +26,8 @@ public class GameController {
         pane.getChildren().clear();
         clock = new Movement();
         g = new Game();
+        selectQuadrant.getItems().clear();
+        selectRotate.getItems().clear();
         for (Quadrants q: Quadrants.values()) {
             selectQuadrant.getItems().add(q.getText());
         }
@@ -38,25 +40,33 @@ public class GameController {
         pane.getChildren().add(bv);
         clock.setBoard(g.getBoard());
         startClock();
+        updateViews();
+    }
+    @FXML
+    public void reset() {
+        initialize();
     }
     @FXML
     public void takeTurn() {
-        if (bv.getSelectedX()>= 0 && bv.getSelectedY() >= 0 & clock.getIsReady()) {
-            Quadrants q= Quadrants.Q2;
-            Rotation r= Rotation.CLOCKWISE;
-            for (Quadrants qTemp:Quadrants.values()) {
-                if (selectQuadrant.getSelectionModel().getSelectedItem().equals(qTemp.getText())) {
-                    q = qTemp;
+        if (g.getGameState().playable()) {
+            if (bv.getSelectedX()>= 0 && bv.getSelectedY() >= 0 & clock.getIsReady()) {
+                Quadrants q = Quadrants.Q2;
+                Rotation r = Rotation.CLOCKWISE;
+                for (Quadrants qTemp : Quadrants.values()) {
+                    if (selectQuadrant.getSelectionModel().getSelectedItem().equals(qTemp.getText())) {
+                        q = qTemp;
+                    }
                 }
-            }
-            for (Rotation rTemp:Rotation.values()) {
-                if (selectRotate.getSelectionModel().getSelectedItem().equals(rTemp.getText())) {
-                    r = rTemp;
+                for (Rotation rTemp : Rotation.values()) {
+                    if (selectRotate.getSelectionModel().getSelectedItem().equals(rTemp.getText())) {
+                        r = rTemp;
+                    }
                 }
+                bv.setFill(bv.getSelectedX(), bv.getSelectedY(), g.getTurn());
+                g.takeTurn(bv.getSelectedX(), bv.getSelectedY(), q, r);
+                clock.startRotate(q, r);
+                g.checkWinner();
             }
-            bv.setFill(bv.getSelectedX(), bv.getSelectedY(),g.getTurn());
-            g.takeTurn(bv.getSelectedX(), bv.getSelectedY(), q,r);
-            clock.startRotate(q,r);
         }
     }
     @FXML
@@ -64,6 +74,7 @@ public class GameController {
         if (g.lastCheck() & clock.getIsReady()) {
             clock.startRotate(g.getLastQuadrant(), g.getLastRotate());
             g.undoTurn();
+            g.checkWinner();
         }
     }
 
@@ -115,7 +126,13 @@ public class GameController {
     }
     public void updateViews() {
         bv.updateBoard();
-        title.setTextFill(g.getTurn().getFill());
+        if (g.getGameState() == State.NOWINNER){
+            title.setTextFill(g.getTurn().getFill());
+            title.setText("Pentago");
+        } else  {
+            title.setText(g.getGameState().getTitle());
+            title.setTextFill(g.getGameState().getTitleColor());
+        }
     }
     @FXML
     private void startClock() {
