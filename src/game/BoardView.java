@@ -7,7 +7,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class BoardView extends Parent {
-    private Board g;
+    private Game g;
+    private Board b;
     private Group Q1;
     private Rectangle r1;
     private Group Q2;
@@ -16,9 +17,15 @@ public class BoardView extends Parent {
     private Rectangle r3;
     private Group Q4;
     private Rectangle r4;
-
-    public BoardView(Board g) {
+    private Circle[][] spots;
+    private int selectedX;
+    private int selectedY;
+    public BoardView(Game g) {
+        selectedX = -1;
+        selectedY = -1;
+        spots = new Circle[6][6];
         this.g = g;
+        b = g.getBoard();
         r1 = new Rectangle();
         r1.setHeight(300);
         r1.setWidth(300);
@@ -37,9 +44,10 @@ public class BoardView extends Parent {
                 c.setFill(Color.TAN);
                 c.setOnMouseClicked(event -> {
                     if (c.getFill() == Color.TAN) {
-                        c.setFill(g.takeTurn());
+                        Select((((int)c.getCenterX()-50)/100),(((int)c.getCenterY()-50)/100));
                     }
                 });
+                spots[x+3][y] = c;
                 Q1.getChildren().add(c);
                 c.toFront();
             }
@@ -62,9 +70,10 @@ public class BoardView extends Parent {
                 c.setFill(Color.TAN);
                 c.setOnMouseClicked(event -> {
                     if (c.getFill() == Color.TAN) {
-                        c.setFill(g.takeTurn());
+                        Select((((int)c.getCenterX()-50)/100),(((int)c.getCenterY()-50)/100));
                     }
                 });
+                spots[x][y] = c;
                 Q2.getChildren().add(c);
                 c.toFront();
             }
@@ -87,9 +96,10 @@ public class BoardView extends Parent {
                 c.setFill(Color.TAN);
                 c.setOnMouseClicked(event -> {
                     if (c.getFill() == Color.TAN) {
-                        c.setFill(g.takeTurn());
+                        Select((((int)c.getCenterX()-50)/100),(((int)c.getCenterY()-50)/100));
                     }
                 });
+                spots[x][y+3] = c;
                 Q3.getChildren().add(c);
                 c.toFront();
             }
@@ -112,9 +122,10 @@ public class BoardView extends Parent {
                 c.setFill(Color.TAN);
                 c.setOnMouseClicked(event -> {
                     if (c.getFill() == Color.TAN) {
-                        c.setFill(g.takeTurn());
+                        Select((((int)c.getCenterX()-50)/100),(((int)c.getCenterY()-50)/100));
                     }
                 });
+                spots[x+3][y+3] = c;
                 Q4.getChildren().add(c);
                 c.toFront();
             }
@@ -125,10 +136,46 @@ public class BoardView extends Parent {
         getChildren().add(Q3);
         getChildren().add(Q4);
     }
-    public void Update() {
-        Q1.setRotate(g.getQ1Rotation());
-        Q2.setRotate(g.getQ2Rotation());
-        Q3.setRotate(g.getQ3Rotation());
-        Q4.setRotate(g.getQ4Rotation());
+    public void Select(int x1, int y1) {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6 ;y++ ) {
+                spots[x][y].setStroke(Color.TAN);
+                if (x == x1 & y == y1) {
+                    spots[x][y].setStroke(Color.YELLOW);
+                }
+            }
+        }
+        selectedX = x1;
+        selectedY = y1;
+    }
+    public int getSelectedX() {
+        return selectedX;
+    }
+    public int getSelectedY() {
+        return selectedY;
+    }
+    public void updateRotate() {
+       Q1.setRotate(b.getQ1Rotation());
+       Q2.setRotate(b.getQ2Rotation());
+       Q3.setRotate(b.getQ3Rotation());
+       Q4.setRotate(b.getQ4Rotation());
+    }
+    public void setFill(int x, int y,Players p) {
+        spots[x][y].setFill(p.getFill());
+    }
+    public void updateBoard() {
+        b.setQ1Rotation(0);
+        b.setQ2Rotation(0);
+        b.setQ3Rotation(0);
+        b.setQ4Rotation(0);
+        updateRotate();
+        for (int x = 0; x<6;x++) {
+            for (int y=0;y<6;y++) {
+                spots[x][y].setStroke(Color.TAN);
+                spots[x][y].setFill(b.getBoard()[x][y].getFill());
+            }
+        }
+        selectedX = -1;
+        selectedY = -1;
     }
 }
