@@ -36,6 +36,7 @@ public class GameController {
         clock.setBoard(g.getBoard());
         startClock();
     }
+    @FXML
     public void takeTurn() {
         if (bv.getSelectedX()>= 0 && bv.getSelectedY() >= 0 & clock.getIsReady()) {
             Quadrants q= Quadrants.Q2;
@@ -53,6 +54,13 @@ public class GameController {
             bv.setFill(bv.getSelectedX(), bv.getSelectedY(),g.getTurn());
             g.takeTurn(bv.getSelectedX(), bv.getSelectedY(), q,r);
             clock.startRotate(q,r);
+        }
+    }
+    @FXML
+    public void undoTurn() {
+        if (g.lastCheck() & clock.getIsReady()) {
+            clock.startRotate(g.getLastQuadrant(), g.getLastRotate());
+            g.undoTurn();
         }
     }
 

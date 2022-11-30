@@ -16,7 +16,7 @@
    <center>
       <Pane fx:id="pane" prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets />
+            <Insets left="20.0" right="20.0" />
          </BorderPane.margin>
          <cursor>
             <Cursor fx:constant="CROSSHAIR" />
@@ -60,4 +60,11 @@
          </children>
       </VBox>
    </top>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#undoTurn" text="Undo Turn" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
