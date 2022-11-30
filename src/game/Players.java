@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public enum Players {
     EMPTY {
         @Override
-        public Color getFill(){return Color.BURLYWOOD;}
+        public Color getFill(){return Color.TAN;}
         @Override
         public String getText() {return "";}
         @Override

@@ -3,20 +3,20 @@ package game;
 import javafx.scene.paint.Color;
 
 public class Board {
-    int Q1Rotation;
-    int Q2Rotation;
-    int Q3Rotation;
-    int Q4Rotation;
-    Players[][] Q1;
-    Players[][] Q2;
-    Players[][] Q3;
-    Players[][] Q4;
+    private int Q1Rotation;
+    private int Q2Rotation;
+    private int Q3Rotation;
+    private int Q4Rotation;
+    private Players[][] Q1;
+    private Players[][] Q2;
+    private Players[][] Q3;
+    private Players[][] Q4;
 
     public Board() {
-        Players[][] Q1 = new Players[3][3];
-        Players[][] Q2 = new Players[3][3];
-        Players[][] Q3 = new Players[3][3];
-        Players[][] Q4 = new Players[3][3];
+        Q1 = new Players[3][3];
+        Q2 = new Players[3][3];
+        Q3 = new Players[3][3];
+        Q4 = new Players[3][3];
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 Q1[x][y] = Players.EMPTY;
@@ -55,15 +55,15 @@ public class Board {
     public int getQ4Rotation() {
         return Q4Rotation;
     }
-    public void move (int q,int r) {
-        if (q==1) {
-            setQ1Rotation(getQ1Rotation()+r);
-        } else if (q==2) {
-            setQ2Rotation(getQ2Rotation()+r);
-        } else if (q==3) {
-            setQ3Rotation(getQ3Rotation()+r);
-        }else if (q==4) {
-            setQ4Rotation(getQ4Rotation()+r);
+    public void move (Quadrants q,Rotation r) {
+        if (q==Quadrants.Q1) {
+            setQ1Rotation(getQ1Rotation()+r.getDR());
+        } else if (q==Quadrants.Q2) {
+            setQ2Rotation(getQ2Rotation()+r.getDR());
+        } else if (q==Quadrants.Q3) {
+            setQ3Rotation(getQ3Rotation()+r.getDR());
+        }else if (q==Quadrants.Q4) {
+            setQ4Rotation(getQ4Rotation()+r.getDR());
         }
     }
     public void rotateQuadrantClockwise(Quadrants q){
@@ -78,16 +78,17 @@ public class Board {
         }
     }
     public Players[][] clockwiseRotateHelper(Players[][] q) {
-        Players[][] temp = q;
-        q[0][0] = temp[2][0];
-        q[0][1] = temp[1][0];
-        q[0][2] = temp[0][0];
-        q[1][0] = temp[2][1];
-        q[1][2] = temp[0][1];
-        q[2][0] = temp[2][2];
-        q[2][1] = temp[1][2];
-        q[2][2] = temp[0][2];
-        return q;
+        Players[][] ret = new Players[6][6];
+        ret[0][0] = q[0][2];
+        ret[0][1] = q[1][2];
+        ret[0][2] = q[2][2];
+        ret[1][0] = q[0][1];
+        ret[1][2] = q[2][1];
+        ret[2][0] = q[0][0];
+        ret[2][1] = q[1][0];
+        ret[2][2] = q[2][0];
+        ret[1][1] = q[1][1];
+        return ret;
     }
     public void rotateQuadrantCounterclockwise(Quadrants q){
         if (q == Quadrants.Q1) {
@@ -101,24 +102,25 @@ public class Board {
         }
     }
     public Players[][] counterclockwiseRotateHelper(Players[][] q) {
-        Players[][] temp = q;
-        q[0][0] = temp[0][2];
-        q[0][1] = temp[1][2];
-        q[0][2] = temp[2][2];
-        q[1][0] = temp[0][1];
-        q[1][2] = temp[2][1];
-        q[2][0] = temp[0][0];
-        q[2][1] = temp[1][0];
-        q[2][2] = temp[2][0];
-        return q;
+        Players[][] ret = new Players[6][6];
+        ret[0][0] = q[2][0];
+        ret[0][1] = q[1][0];
+        ret[0][2] = q[0][0];
+        ret[1][0] = q[2][1];
+        ret[1][2] = q[0][1];
+        ret[2][0] = q[2][2];
+        ret[2][1] = q[1][2];
+        ret[2][2] = q[0][2];
+        ret[1][1] = q[1][1];
+        return ret;
     }
     public void setSpot(int x, int y,Players p) {
         if (x<3 && y <3) {
             Q2[x][y]= p;
         } else if (x<3) {
-            Q1[x][y%3] = p;
+            Q3[x][y%3] = p;
         } else if (y<3) {
-            Q3[x%3][y] = p;
+            Q1[x%3][y] = p;
         } else {
             Q4[x%3][y%3] = p;
         }
@@ -139,12 +141,11 @@ public class Board {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y <3; y++) {
                 board[x][y] = Q2[x][y];
-                board[x][y+3]= Q1[x][y];
-                board[x+3][y] = Q3[x][y];
+                board[x+3][y]= Q1[x][y];
+                board[x][y+3] = Q3[x][y];
                 board[x+3][y+3] = Q4[x][y];
             }
         }
-
         return board;
     }
 
