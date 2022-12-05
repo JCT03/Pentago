@@ -61,7 +61,7 @@
       </VBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#undoTurn" text="Undo Turn">
                <opaqueInsets>
@@ -73,6 +73,9 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#reset" text="Reset Game" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
       </HBox>
    </bottom>
 </BorderPane>

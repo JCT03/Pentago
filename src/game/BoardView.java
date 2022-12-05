@@ -116,7 +116,7 @@ public class BoardView extends Parent {
         for (int x = 0; x < 3;x++) {
             for (int y = 0; y < 3; y++) {
                 Circle c = new Circle();
-                c.setRadius(45);
+                c.setRadius(40);
                 c.setCenterX(100 * x + 350);
                 c.setCenterY(100 * y + 350);
                 c.setFill(Color.TAN);

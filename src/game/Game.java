@@ -63,7 +63,7 @@ public class Game {
                     paths.add(new Players[]{board.getBoard()[i][j],board.getBoard()[i+1][j], board.getBoard()[i+2][j], board.getBoard()[i+3][j], board.getBoard()[i+4][j]});
                 }
                 if (i + 4 < 6 && j + 4 < 6) {
-                    paths.add(new Players[]{board.getBoard()[i][j],board.getBoard()[i+1][j+1], board.getBoard()[i+2][j+2], board.getBoard()[i+3][j+3], board.getBoard()[i+3][j+4]});
+                    paths.add(new Players[]{board.getBoard()[i][j],board.getBoard()[i+1][j+1], board.getBoard()[i+2][j+2], board.getBoard()[i+3][j+3], board.getBoard()[i+4][j+4]});
                     paths.add(new Players[]{board.getBoard()[i+4][j],board.getBoard()[i+3][j+1], board.getBoard()[i+2][j+2], board.getBoard()[i+1][j+3], board.getBoard()[i][j+4]});
                 }
             }
